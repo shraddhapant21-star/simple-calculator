@@ -28,3 +28,4 @@ Press = to calculate
 Use AC to clear or DE to delete the last input
 
 ## Live Demo
+https://shraddhapant21-star.github.io/simple-calculator/
