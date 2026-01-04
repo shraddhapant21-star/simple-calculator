@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <div class="container">
+    <div class="calculator">
+      <form>
+        <div class="display">
+          <input type="text" id="display" name="display" readonly>
+        </div>
+        <div>
+          <input type="button" value="AC" onclick="display.value=''" class="operator">
+          <input type="button" value="DE" onclick="display.value =display.value.toString().slice(0,-1)" class="operator">
+          <input type="button" value="." onclick="display.value += this.value" class="operator">
+          <input type="button" value="/" onclick="display.value += this.value" class="operator">
+        </div>
+        <div>
+          <input type="button" value="7" onclick="display.value += this.value">
+          <input type="button" value="8" onclick="display.value += this.value">
+          <input type="button" value="9" onclick="display.value += this.value">
+          <input type="button" value="*" onclick="display.value += this.value">
+        </div>
+        <div>
+          <input type="button" value="4" onclick="display.value += this.value">
+          <input type="button" value="5" onclick="display.value += this.value">
+          <input type="button" value="6" onclick="display.value += this.value">
+          <input type="button" value="-" onclick="display.value += this.value">
+        </div>
+        <div>
+          <input type="button" value="1" onclick="display.value += this.value">
+          <input type="button" value="2" onclick="display.value += this.value">
+          <input type="button" value="3" onclick="display.value += this.value">
+          <input type="button" value="+" onclick="display.value += this.value">
+        </div>
+        <div>
+          <input type="button" value="00" onclick="display.value += this.value" class="operator">
+          <input type="button" value="0" onclick="display.value += this.value" class="operator">
+          <input type="button" value="=" onclick="calculate()" class="equal-btn operator">
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+  const display = document.getElementById("display");
+
+  function calculate() {
+    // If message is already showing, do nothing
+    if (display.value === "Clear the value first") return;
+
+    try {
+      // Prevent double operators
+      if (/[\+\-\*\/]{2,}/.test(display.value)) {
+        display.value = "Clear the value first";
+        return;
+      }
+
+      // Prevent empty evaluation
+      if (display.value.trim() === "") return;
+
+      display.value = Function("return " + display.value)();
+    } catch {
+      display.value = "Clear the value first";
+    }
+  }
+</script>
+
+
+
+</body>
+</html>
